@@ -1,7 +1,8 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from Nexaveda_user.apis.login_api import LoginAPI
-
+from Nexaveda_user.apis.signup_api import SignupAPI
+from Nexaveda_user.apis.logout_api import LogoutAPI
 
 urlpatterns = [
     #jwt authentication urls
@@ -10,6 +11,10 @@ urlpatterns = [
     
     #loginurls
     path('login/', LoginAPI.as_view(), name = 'login'),
+    #signup urls
+    path('signup/', SignupAPI.as_view(), name = 'signup'),
+    #logout urls
+    path('logout/', LogoutAPI.as_view(), name = 'logout'),
     
 ]
 
