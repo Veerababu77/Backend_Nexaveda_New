@@ -31,12 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Nexaveda_user',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -68,17 +71,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Nexaveda.wsgi.application'
-
+from decouple import config
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+import os
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'Nexaveda',#os.environ.get("DB_NAME"),
+        "USER": 'postgres',#os.environ.get("DB_USER"),
+        "PASSWORD": 'Veeru@9848',#os.environ.get("DB_PASSWORD"),
+        "HOST": 'localhost',#os.environ.get("DB_HOST", "localhost"),
+        "PORT": '5432',#os.environ.get("DB_PORT", 5432),
     }
 }
+
 
 
 # Password validation
@@ -121,3 +130,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+AUTH_USER_MODEL = "Nexaveda_user.User"
+
+AUTHENTICATION_BACKENDS = [
+    #'Nexaveda_user.backends.CustomAuthBackend',  
+    'django.contrib.auth.backends.ModelBackend', 
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
