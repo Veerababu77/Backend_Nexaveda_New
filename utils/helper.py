@@ -1,5 +1,6 @@
 import uuid
 from django.contrib.auth import get_user_model
+from django.db import models
 
 User = get_user_model()
 
@@ -15,3 +16,13 @@ def generate_unique_username(name_or_email):
             return username
     
     raise ValueError("Unable to create unique username") 
+
+class TimeStampModel(models.Model):
+    
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    
+    class Meta:
+        abstract = True
+    
+    

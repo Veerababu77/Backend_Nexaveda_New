@@ -1,7 +1,31 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from Nexaveda_user.models.user_model import User
+from Nexaveda_user.models.courses_model import CoursesModel, TopicModel, SubtopicModel, RatingModel
 
+@admin.register(CoursesModel)
+class CoursesAdmin(admin.ModelAdmin):
+    list_display = ('course_name', 'description', 'course_level', 'course_cost')
+    list_filter = ('course_name', 'course_cost')
+    ordering = ['-created_at']
+    
+@admin.register(TopicModel)
+class TopicAdmin(admin.ModelAdmin):
+    list_display = ('title','created_at')
+    list_filter = ('title','created_at')
+    ordering = ['-created_at']
+    
+@admin.register(SubtopicModel)
+class SubTopicAdmin(admin.ModelAdmin):
+    list_display = ('subtopic','created_at')
+    list_filter = ('subtopic','created_at')
+    ordering = ['-created_at']
+    
+@admin.register(RatingModel)
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ('rating','created_at')
+    list_filter = ('rating','created_at')
+    ordering = ['-created_at']
 class UserAdmin(BaseUserAdmin):
     # Fields to display in admin list
     list_display = ('email', 'username', 'phone_number', 'is_staff', 'is_superuser')

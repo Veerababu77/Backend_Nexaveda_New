@@ -19,6 +19,8 @@ class SignupSerializer(serializers.ModelSerializer):
         fields = ['id','username', 'phone_number', 'email', 'password','password2']
         
     def validate(self, attrs):
+        if attrs['email'] == None:
+            raise ValidationError({'email': 'Email required for user creation'})
         if attrs['password'] != attrs['password2']:
             raise ValidationError({'Password': 'Passwords must be same'})
         return attrs
