@@ -16,7 +16,7 @@ class SignupSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['id','username', 'phone_number', 'email', 'password','password2']
+        fields = ['id','username', 'phone_number', 'email', 'password','password2', 'role']
         
     def validate(self, attrs):
         if attrs['email'] == None:
@@ -30,6 +30,9 @@ class SignupSerializer(serializers.ModelSerializer):
         if not validated_data.get('username'):
             name_or_email = validated_data.get('name') or validated_data.get('email')
             validated_data['username'] = generate_unique_username(name_or_email)
-        user = User.objects.create_user(**validated_data)
+        if validated_data.get('role') == "ADMIN":
+            user = User.objects.create_superuser(**validated_data)
+        else:
+            user = User.objects.create_user(**validated_data)
         return user
     

@@ -12,7 +12,7 @@ class UserManager(BaseUserManager):
     """
     use_in_migration = True
     
-    def create_user(self, email = None, username = None, phone_number = None, password = None, role="STUDENT", **extra_fields):
+    def create_user(self, email = None, username = None, phone_number = None, password = None, role= None, **extra_fields):
         """
         Create and save a regular user.
         At least one of email, username, or phone_number must be provided.

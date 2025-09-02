@@ -24,6 +24,7 @@ class CoursesModel(TimeStampModel):
     course_level = models.CharField(max_length = 100, choices = CHOICE_LEVEL, default = "BEGINEER")
     course_cost = models.IntegerField(default = 3000)
     course_discount = models.IntegerField(default = 50)
+    is_active = models.BooleanField(default = True)
     
     
     def __str__(self):

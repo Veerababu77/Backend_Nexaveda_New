@@ -1,6 +1,8 @@
 import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
+from twilio.rest import Client
+from django.conf import settings
 
 User = get_user_model()
 
@@ -24,5 +26,15 @@ class TimeStampModel(models.Model):
     
     class Meta:
         abstract = True
+        
+def send_sms(phone_number, message):
+    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+    message = client.messages.create(
+        body = message,
+        from_ = settings.TWILIO_PHONE_NUMBER,
+        to = phone_number
+    )
+    return message.sid
+    
     
     
