@@ -26,6 +26,10 @@ class UserManager(BaseUserManager):
         if not username:
             username = f"Nexa_{uuid.uuid4().hex[:4]}"
             
+        if not role:
+            role = "STUDENT"
+            
+        # extra_fields.setdefault('role', 'STUDENT')
         if role == "ADMIN":
             extra_fields.setdefault("is_staff", True)
             extra_fields.setdefault("is_superuser", True)
@@ -38,7 +42,7 @@ class UserManager(BaseUserManager):
             extra_fields.setdefault("is_staff", False)
             extra_fields.setdefault("is_superuser", False)
             extra_fields.setdefault("is_active", True)
-            
+        
         user = self.model(email = email, username = username, phone_number = phone_number, role = role, **extra_fields)
         user.set_password(password)
         user.save(using = self._db)

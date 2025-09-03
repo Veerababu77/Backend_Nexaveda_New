@@ -27,9 +27,14 @@ class SignupSerializer(serializers.ModelSerializer):
     
     def create(self, validated_data):
         validated_data.pop('password2', None)
+        user = None
         if not validated_data.get('username'):
             name_or_email = validated_data.get('name') or validated_data.get('email')
             validated_data['username'] = generate_unique_username(name_or_email)
+            
+        role = validated_data.get('role', "STUDENT")
+        validated_data['role'] = role
+        
         if validated_data.get('role') == "ADMIN":
             user = User.objects.create_superuser(**validated_data)
         else:
