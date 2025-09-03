@@ -21,7 +21,7 @@ class LoginSerializer(serializers.Serializer):
             user_obj = User.objects.get(
                 (Q(email = login) | Q(phone_number = login) | Q(username = login))
             )
-            user = authenticate(username = user_obj, password = password)
+            user = authenticate(request = request, username = user_obj.username, password = password)
         except User.DoesNotExist:
             raise serializers.ValidationError("Invalid Credentials")
         if not user:

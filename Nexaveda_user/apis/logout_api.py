@@ -20,7 +20,7 @@ class LogoutAPI(APIView):
             return Response(
                 {
                     "message" :"User logout successfully",
-                }, status = status.HTTP_200_OK
+                }, status = status.HTTP_205_RESET_CONTENT
             )
         except Exception as e:
             raise AuthenticationFailed("Invalid token or already logged out")

@@ -5,6 +5,8 @@ from Nexaveda_user.apis.signup_api import SignupAPI
 from Nexaveda_user.apis.logout_api import LogoutAPI
 from Nexaveda_user.apis.rest_password_api import ResetPasswordAPI, ResetPasswordVerifyAPI
 
+app_name = "Nexaveda_user"
+
 urlpatterns = [
     #jwt authentication urls
     path('api/token/', TokenObtainPairView.as_view(), name = 'token_obtain_pair'),
