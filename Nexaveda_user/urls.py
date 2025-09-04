@@ -5,7 +5,8 @@ from Nexaveda_user.apis.signup_api import SignupAPI
 from Nexaveda_user.apis.logout_api import LogoutAPI
 from Nexaveda_user.apis.rest_password_api import ResetPasswordAPI, ResetPasswordVerifyAPI
 
-from Nexaveda_user.apis.course_model_api import CourseAPI
+from Nexaveda_user.apis.course_model_api import CourseAPI, CourseDetailAPI
+from Nexaveda_user.apis.topic_api import TopicAPI
 
 app_name = "Nexaveda_user"
 
@@ -26,7 +27,9 @@ urlpatterns = [
     
     #Course urls
     path('course/', CourseAPI.as_view(), name = 'course'),
+    path('course/<uuid:id>/', CourseDetailAPI.as_view(), name = 'course-detail'),
     
+    path('topic/<uuid:id>/', TopicAPI.as_view(), name = 'topic'),
 ]
 
 
