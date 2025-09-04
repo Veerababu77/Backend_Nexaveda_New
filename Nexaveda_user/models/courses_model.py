@@ -16,7 +16,7 @@ class CoursesModel(TimeStampModel):
     ]
     
     id = models.UUIDField(default = uuid.uuid4, unique = True, editable = False,primary_key=True)
-    course_name = models.CharField(max_length = 255, null = True, blank = True)
+    course_name = models.CharField(max_length = 255, unique = True)
     description = models.TextField(null = True, blank = True)
     course_pic = models.ImageField(upload_to = 'course_pic/', null = True, blank = True)
     instructor = models.ForeignKey('User', on_delete = models.CASCADE, related_name = 'instructor')
@@ -28,7 +28,7 @@ class CoursesModel(TimeStampModel):
     
     
     def __str__(self):
-        return self.course_name
+        return self.course_name or "No"
     
     
 class TopicModel(TimeStampModel):

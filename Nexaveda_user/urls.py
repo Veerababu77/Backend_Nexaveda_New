@@ -5,6 +5,8 @@ from Nexaveda_user.apis.signup_api import SignupAPI
 from Nexaveda_user.apis.logout_api import LogoutAPI
 from Nexaveda_user.apis.rest_password_api import ResetPasswordAPI, ResetPasswordVerifyAPI
 
+from Nexaveda_user.apis.course_model_api import CourseAPI
+
 app_name = "Nexaveda_user"
 
 urlpatterns = [
@@ -21,6 +23,9 @@ urlpatterns = [
     #reset password url
     path('reset-password/', ResetPasswordAPI.as_view(), name = 'reset_password'),
     path('reset-password-verify/', ResetPasswordVerifyAPI.as_view(), name = 'reset-password-verify'),
+    
+    #Course urls
+    path('course/', CourseAPI.as_view(), name = 'course'),
     
 ]
 

@@ -150,6 +150,8 @@ REST_FRAMEWORK = {
         'user' : '5/minutes',
         'anon' : '3/minutes',
     },
+    'DEFAULT_PAGINATION_CLASS': "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE" : 10
 }
 
 from datetime import timedelta
