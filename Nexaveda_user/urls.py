@@ -7,6 +7,8 @@ from Nexaveda_user.apis.rest_password_api import ResetPasswordAPI, ResetPassword
 
 from Nexaveda_user.apis.course_model_api import CourseAPI, CourseDetailAPI
 from Nexaveda_user.apis.topic_api import TopicAPI, TopicDetailAPI
+from Nexaveda_user.apis.subtopic_api import SubtopicAPI, SubtopicDetailAPI
+from Nexaveda_user.apis.rating_api import RatingAPI
 
 app_name = "Nexaveda_user"
 
@@ -31,6 +33,11 @@ urlpatterns = [
     
     path('course/<uuid:course_id>/topic/', TopicAPI.as_view(), name = 'topic'),
     path('course/topic/<uuid:id>/', TopicDetailAPI.as_view(), name = "topic-detail"),
+    
+    path('course/topic/<uuid:topic_id>/subtopic/', SubtopicAPI.as_view(), name = 'subtopic'),
+    path('course/topic/subtopic/<uuid:id>/', SubtopicDetailAPI.as_view(), name = 'sub-topic-detail'),
+    
+    path('course/<uuid:course_id>/rating/', RatingAPI.as_view(), name = 'rating'),
 ]
 
 

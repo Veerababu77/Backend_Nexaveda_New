@@ -1,7 +1,7 @@
 """Course APIs to manage CRUD operations."""
 
 from rest_framework.views import APIView
-from Nexaveda_user.serializers.course_creation_serializer import CourseSerializer
+from Nexaveda_user.serializers.course_creation_serializer import CourseSerializer, CourseGetSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from Nexaveda_user.models.courses_model import CoursesModel
@@ -61,3 +61,11 @@ class CourseDetailAPI(APIView):
             {"message": "Course deleted (soft delete)"},
             status=status.HTTP_200_OK
         )
+        
+    def get(self, request, id):
+        course = get_object_or_404(CoursesModel, id = id, is_active = True)
+        serializer = CourseGetSerializer(course, context={"request": request})
+        return Response({
+            "message":"Courses fetched successfully",
+            "data" : serializer.data
+        }, status = status.HTTP_200_OK)

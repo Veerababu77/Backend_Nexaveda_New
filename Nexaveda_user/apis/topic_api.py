@@ -4,8 +4,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from Nexaveda_user.models.courses_model import TopicModel, CoursesModel
 from Nexaveda_user.serializers.course_creation_serializer import TopicSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class TopicAPI(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, course_id):
         try:
             course = CoursesModel.objects.get(id = course_id)
@@ -17,6 +19,7 @@ class TopicAPI(APIView):
         return Response({"message":"Topic created successfully", "data" : serializer.data}, status = status.HTTP_200_OK)
 
 class TopicDetailAPI(APIView):
+    permission_classes = [IsAuthenticated]
     def patch(self, request, id):
         try:
             topic = TopicModel.objects.get(id = id)
