@@ -16,7 +16,7 @@ class TopicAPI(APIView):
         serializer = TopicSerializer(data = request.data)
         serializer.is_valid(raise_exception = True)
         serializer.save(course = course)
-        return Response({"message":"Topic created successfully", "data" : serializer.data}, status = status.HTTP_200_OK)
+        return Response({"message":"Topic created successfully", "data" : serializer.data}, status = status.HTTP_201_CREATED)
 
 class TopicDetailAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -28,7 +28,7 @@ class TopicDetailAPI(APIView):
         serializer = TopicSerializer(topic, data = request.data, partial = True)
         serializer.is_valid(raise_exception = True)
         serializer.save()
-        return Response({"message":"Topic saved successfully"}, status = status.HTTP_200_OK)
+        return Response({"message":"Topic saved successfully", "data": serializer.data}, status = status.HTTP_200_OK)
     
     def delete(self, request, id):
         try:

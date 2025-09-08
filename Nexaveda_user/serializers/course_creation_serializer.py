@@ -20,13 +20,16 @@ class TopicSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    avg_rating = serializers.FloatField(read_only=True)
     class Meta:
         model = CoursesModel
         fields = [
             "id", "course_name", "description", "duration_in_days",
             "course_level", "course_cost", "course_discount",
-            "is_active", "created_at", "instructor"
+            "is_active", "created_at", "instructor","avg_rating","course_pic"
         ]
+    def get_avg_rating(self,obj):
+        return obj.courses.aggregate(avg = Avg("rating"))["avg"] or 0
 
 class TopicGetSerializer(serializers.ModelSerializer):
     subtopic = SubtopicSerializer(read_only = True, many = True)

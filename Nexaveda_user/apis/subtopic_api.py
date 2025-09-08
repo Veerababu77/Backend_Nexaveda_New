@@ -20,7 +20,7 @@ class SubtopicAPI(APIView):
         return Response({
             "message":"Subtopic added to topic successfully",
             "data" : serializer.data
-        }, status = status.HTTP_200_OK)
+        }, status = status.HTTP_201_CREATED)
 
 class SubtopicDetailAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -40,4 +40,4 @@ class SubtopicDetailAPI(APIView):
     def delete(self, request, id):
         subtopic = get_object_or_404(SubtopicModel, id = id)
         subtopic.delete()
-        return Response({"message":"Sub topic deleted successfully"}, status=status.HTTP_200_OK)
+        return Response({"message":"Sub topic deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

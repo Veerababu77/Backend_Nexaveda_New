@@ -60,6 +60,7 @@ class RatingModel(TimeStampModel):
     id = models.UUIDField(default = uuid.uuid4, unique = True, editable = False, primary_key = True)
     rating = models.IntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(5)])
     course = models.ForeignKey(CoursesModel, on_delete = models.CASCADE, related_name = 'courses')
+    user = models.ForeignKey('User', on_delete = models.CASCADE, related_name = 'user_rating')
     
     def __str__(self):
         return f"{self.course.course_name}"
