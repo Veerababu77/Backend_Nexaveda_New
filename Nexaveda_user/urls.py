@@ -10,6 +10,8 @@ from Nexaveda_user.apis.topic_api import TopicAPI, TopicDetailAPI
 from Nexaveda_user.apis.subtopic_api import SubtopicAPI, SubtopicDetailAPI
 from Nexaveda_user.apis.rating_api import RatingAPI
 
+from Nexaveda_user.apis.attendence_api import AttendenceAPI
+
 app_name = "Nexaveda_user"
 
 urlpatterns = [
@@ -38,6 +40,8 @@ urlpatterns = [
     path('course/topic/subtopic/<uuid:id>/', SubtopicDetailAPI.as_view(), name = 'sub-topic-detail'),
     
     path('course/<uuid:course_id>/rating/', RatingAPI.as_view(), name = 'rating'),
+    
+    path('attendence/', AttendenceAPI.as_view(), name = 'attendence'),
 ]
 
 

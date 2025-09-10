@@ -25,6 +25,7 @@ class CoursesModel(TimeStampModel):
     course_cost = models.IntegerField(default = 3000)
     course_discount = models.IntegerField(default = 50)
     is_active = models.BooleanField(default = True)
+    is_subscribed = models.BooleanField(default = False)
     
     
     def __str__(self):

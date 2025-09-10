@@ -17,7 +17,7 @@ class CourseAPI(APIView):
 
     def get(self, request):
         """Fetch all active courses."""
-        courses = CoursesModel.objects.filter(is_active=True)
+        courses = CoursesModel.objects.filter(is_active=True, is_subscribed = False)
         serializer = CourseSerializer(courses, many=True)
         return Response(
             {"message": "Courses fetched successfully", "data": serializer.data},

@@ -2,7 +2,42 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from Nexaveda_user.models.user_model import User
 from Nexaveda_user.models.courses_model import CoursesModel, TopicModel, SubtopicModel, RatingModel
+from Nexaveda_user.models.certificates_model import Certificates
+from Nexaveda_user.models.my_courses_model import MyCoursesModel
+from Nexaveda_user.models.attendence_model import AttendenceModel
 
+@admin.register(AttendenceModel)
+class AttendenceAdmin(admin.ModelAdmin):
+    list_display = ['username','course_name']
+    list_filter = ['created_at']
+    ordering = ['-created_at']
+    
+    def username(self, obj):
+        return obj.user.username
+    username.admin_order_field = 'user__username'
+    username.short_description = 'User'
+    def course_name(self,obj):
+        return obj.course.course_name
+    course_name.admin_order_field = 'course__course_name'
+    course_name.short_description = 'Course'
+@admin.register(MyCoursesModel)
+class MycourseAdmin(admin.ModelAdmin):
+    list_display = ['completion']
+
+@admin.register(Certificates)
+class CertificatesAdmin(admin.ModelAdmin):
+    list_display = ['username','course_name', 'issued_on','avg_score', 'performance']
+    list_filter = ['issued_on']
+    ordering = ['-created_at']
+    
+    def username(self, obj):
+        return obj.user.username
+    username.admin_order_field = 'user__username'
+    username.short_description = 'User'
+    def course_name(self,obj):
+        return obj.course.course_name
+    course_name.admin_order_field = 'course__course_name'
+    course_name.short_description = 'Course'
 @admin.register(CoursesModel)
 class CoursesAdmin(admin.ModelAdmin):
     list_display = ('course_name', 'description', 'course_level', 'course_cost')
